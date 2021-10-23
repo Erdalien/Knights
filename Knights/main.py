@@ -43,8 +43,7 @@ class Knights(TwoPlayerGame):
         self.current_player = 1  # player 1 starts.
 
     def possible_moves(self):
-        """
-		Functions showing you all possible for current moment moves, they are restricted
+        """Functions showing you all possible for current moment moves, they are restricted
 
         :return: Function returns all possible moves for player
         """
@@ -60,8 +59,8 @@ class Knights(TwoPlayerGame):
         ]  # and not blocked
 
     def make_move(self, pos):
-        """
-		You need to move your knight and this function let's to do it after you choose available field
+        """You need to move your knight and this function let's to do it after you choose available field. You can use
+        command 'show moves' to see tip
 
         :param pos: Player choose what move will make
         :return: Players move
@@ -73,8 +72,7 @@ class Knights(TwoPlayerGame):
         self.board[pi, pj] = self.current_player  # place player on board
 
     def ttentry(self):
-        """
-		We need to remember which fields were occupied by knights, function saves it in form of entry
+        """We need to remember which fields were occupied by knights, function saves it in form of entry
 
         :return: Saves all occupied fields
         """
@@ -84,9 +82,8 @@ class Knights(TwoPlayerGame):
         return tuple(e)
 
     def ttrestore(self, entry):
-        """
-		Useful for players is to remember which fields were occupied,
-		what helps during prepering good strategy against our opponent
+        """Useful for players is to remember which fields were occupied, what helps during prepering good strategy
+        against our opponent
 
         :param entry: Parameter saving informations about previously occupied fields
         :return: Entry of occupied fields
@@ -98,8 +95,7 @@ class Knights(TwoPlayerGame):
         self.players[1].pos = string2pos(entry[-1])
 
     def show(self):
-        """
-		Chess table have own wasy to sign, function shows proper chess fields
+        """Chess table have own wasy to sign, function shows proper chess fields
 
         :return: Function shows chess fileds
         """
@@ -123,38 +119,29 @@ class Knights(TwoPlayerGame):
         )
 
     def lose(self):
-        return self.possible_moves() == []
-        """
-        Rules are simple, if you cannot move your knight you lose.
-        Remember that only one person can win
-
+        """Rules are simple, if you cannot move your knight you lose. Remember that only one person can win
 
         :return: If have no possible moves, you lose
         """
+        return self.possible_moves() == []
+
+    def scoring(self):
+        """All games needs some kond of reward, even if this is not real one. Scores helps to keep who is winning
+
+        :return: If you lose, you are losing 100 points
+        """
+        return -100 if (self.possible_moves() == []) else 0
+
+    def is_over(self):
+        """Games are simple, if you lose, you lose. Simple right? This function shows when game ends
+
+        :return: You losed, so game is over
+        """
+        return self.lose()
 
 
-def scoring(self):
-    return -100 if (self.possible_moves() == []) else 0
-    """
-    All games needs some kond of reward, even if this is not real one.
-    Scores helps to keep who is winning
-
-
-    :return: If you lose, you are losing 100 points
-    """
-
-
-def is_over(self):
-    return self.lose()
-    """
-    Games are simple, if you lose, you lose. Simple right?
-    This function shows when game ends
-
-    :return: You losed, so game is over
-    """
-
-
-if __name__ == "__main__":
+if _name_ == "_main_":
+    # Below you can specific AI complex
     ai_algo = Negamax(11)
     game = Knights([AI_Player(ai_algo), Human_Player()], (8, 8))
     game.play()
