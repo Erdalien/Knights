@@ -140,7 +140,7 @@ class Knights(TwoPlayerGame):
         return self.lose()
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     # Below you can specific AI complex
     ai_algo = Negamax(11)
     game = Knights([AI_Player(ai_algo), Human_Player()], (8, 8))
